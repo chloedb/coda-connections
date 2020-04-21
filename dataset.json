@@ -1,0 +1,6 @@
+[
+  {"date":20200407,"state":"AK","positive":213,"negative":6700,"death":6,"total":6913,"totalTestResults":6913});,
+  {"date":20200407,"state":"AL","positive":2119,"negative":12797, "death":56,"total":14916,"totalTestResults":14916},
+  {"date":20200407,"state":"AR","positive":946,"negative":12692, "death":16,"total":13638,"totalTestResults":13638},
+  {"date":20200407,"state":"AS","positive":0,"negative":20, "death":0,"total":31,"totalTestResults":20})
+]
