@@ -1,117 +1,81 @@
-let {Client} = require('pg') // postgres, to connect to the database
-//specifies the class of client instead of require('pg').Client
-let express = require('express');
+'use strict';
+
 let path = require('path');
-let expbs = require('express-handlebars');
-let port = process.env.PORT || 3000;
+let createError = require('http-errors');
+let cookieParser = require('cookie-parser');
+let logger = require('morgan');
+let express = require('express');
 
 let app = express();
-app.use(express.json())
 
-app.use(express.static(path.join(__dirname, 'public')));
+if (!process.env.NODE_ENV) {
+  process.env.NODE_ENV = app.get('env');
+}
 
+// A helper to generate directory paths relative to the
+// project root directory,
 app.root = (...args) => path.join(__dirname, ...args);
+
+// Helper functions to check whether we're in the production
+// or development environment.
+app.inProduction = () => app.get('env') === 'production';
+app.inDevelopment = () => app.get('env') === 'development';
+
+// Tell Express to look in views/ to find our view templates
+// and to use the Handlebars (hbs) to render them.
 app.set('views', app.root('views'));
-app.engine('handlebars', expbs({ defaultLayout: 'layout',
-layoutsDir: path.join(__dirname, 'views/layout')
-}));
 app.set('view engine', 'hbs');
 
+// Put static files like stylesheets in public/
+app.use(express.static(app.root('public')));
+
+// Use a different log format for development vs. production
+if (app.inDevelopment()) {
+  app.use(logger('dev'));
+} else {
+  app.use(logger('combined'));
+}
+
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+
+// Knex is a module used to generate SQL queries
+// See http://knexjs.org/
+let Knex = require('knex');
+
+// Objection is a module used to represent and manipuldate
+// data from a SQL database using JavaScript. It uses connect
+// to generate the appropriate SQL queries.
+// See https://vincit.github.io/objection.js/
+let { Model } = require('objection');
+
+// Tell Knex how to connect to our database
+// See config/database.js
+let dbConfig = require(app.root('knexfile'));
+let knex = Knex(dbConfig[process.env.NODE_ENV]);
+Model.knex(knex);
+
+// See routes.js — this is where our main app code lives.
 let routes = require('./routes');
 app.use('/', routes);
-// app.get('/', async (req, res) => {
-//   res.render('index', {
-//     style: 'style.css'
-//   }) //if you put it here, the index does not show up!
-// })
-app.get("/share", async (req, res) => {
-  res.render('share')
-  // let rows = await readTable();
-  // res.setHeader('content-type', 'application/json')
-  // res.send(JSON.stringify(rows))
-  // res.send('hello world')
-})
 
-app.post("/share", async (req, res) => {
-  let result = {}
-  try {
-    let reqJson = req.body;
-    await createName(reqJson.name);
-    result.success = true;
-  }
-  catch(e) {
-    result.success = false;
-  }
-  finally {
-    res.setHeader('content-type', 'application/json')
-    res.send(JSON.stringify(result))
-  }
-})
+// If no route handled the request then generate an
+// HTTP 404 Not Found error
+app.use((req, res, next) => {
+  next(createError(404));
+});
 
-app.listen(port, () => console.log('server is listening on 3000'))
+// A catch-all error handler.
+app.use((err, req, res, next) => {
+  res.locals.message = err.message;
+  res.locals.error = req.app.inDevelopment() ? err : {};
 
-let client = new Client ({
-  user: "postgres",
-  password: 'postgres',
-  database: 'sample_db' // the name of the database
-})
+  res.status(err.statusCode || 500);
+  res.render('server-error');
+});
 
-// client.connect() //this is a promise
-// .then(() => console.log('connected'))
-// .then(() => client.query(createName)) //this might be where you put variables
-// .then(() => client.query('select * from names'))
-// .then(results => console.table(results.rows))
-// .catch(e => console.log(e))
-// .finally(() => client.end) //ends the client's connection
+app.listen(process.env.PORT || 3000, () => {
+  console.log('Listening on port 3000');
+});
 
-// async version of the same above
-
-// async function execute () {
-//   try { // put these in to make sure there is not a problem or else you won't "catch" the problem
-//   await client.connect() // need to put await or else it will go forward
-//   console.log('connected!')
-//   let results = await client.query('select * from names')
-//   console.table(results.rows)
-//   }
-//   catch (ex) {
-//     console.log(`something went wrong ${ex}`)
-//   }
-//   finally {
-//     await client.end()
-//   }
-// }
-
-async function start() {
-  await connect();
-}
-async function connect() {
-  try {
-    await client.connect();
-  }
-  catch(e) {
-    console.error(`failed ${e}`)
-  }
-  // let todos = await readTodos();
-
-  // let successCreate = await functionname()
-  // let successDelet = await functionname2()
-}
-
-async function readTable() {
-  try {
-    let results = await client.query('select users from names')
-    return results.rows;
-  }
-  catch(e) {
-    return [];
-  }
-}
-
-async function createName(nameText) {
-  try {
-    await client.query('insert into users (name) values ($1)', [nameText]) //inserts todotext into the sql
-  }
-  catch(e) {
-    return [];
-  }
-}
+module.exports = app;
