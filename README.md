@@ -63,7 +63,7 @@ We are using two libraries two interact with the database:
 </ol>
 
 <h2>Iterations</h2>
-<h3>[v0.1] Start The Core App<h3>
+<h3>[v0.1] Start The Core App</h3>
 To create the local development database, run the following command inside the project directory:
 
 <span class="pl-c1">npm run db:create</span>
@@ -75,9 +75,9 @@ npx knex migrate:latest
 Finally, run the following to start the server:
 
 npm start
-Visit http://localhost:3000 to see the app!
+Visit http://localhost:5432 to see the app!
 
-[v0.2] Deploy App To Heroku
+<h3>[v0.2] Deploy App To Heroku</h3>
 See Deploying To Heroku below for instructions on how to make the application available to the public. You can skip this step for now, if you want.
 
 <h2>Deploying To Heroku</h2>
