@@ -3,42 +3,48 @@
 Are you feeling alone with nowhere to go? Coda Connects has your back where it connects anonymous people to each other and you to important resources. Coda Connects is an online anonymous outlet for people to express themselves and see other people share their experiences with depression.
 
 This is a small web application built for beginners that highlights essential web programming topics such as:
-
-The HTTP request response life cycle
-Node's Express web application framework
-Fundamental patterns in computer programming (loops, branching, variables)
-Data persistence using a SQL database
-HTML templating using Handlebars
-Deploying an application using Heroku
-Contents
-Getting Started
-Installing PostgreSQL
-Mac
-Windows
-Interacting With The Database
-Iterations
-Deploying To Heroku
-Getting Started
+<ul>
+  <li>The HTTP request response life cycle</li>
+  <li>Node's Express web application framework</li>
+  <li>Fundamental patterns in computer programming (loops, branching, variables)</li>
+  <li>Data persistence using a SQL database</li> 
+  <li>HTML templating using Handlebars</li> 
+  <li>Deploying an application using Heroku</li>
+ </ul>
+<h2>Contents</h2>
+  <ul>
+    <li>Getting Started</li>
+    <li>Installing PostgreSQL</li>
+      <ul>
+       <li>Mac</li>
+       <li>Windows</li>
+      </ul>
+    <li>Interacting With The Database</li>
+    <li>Iterations</li>
+    <li>Deploying To Heroku</li>
+  </ul>   
+    <h2>Getting Started</h2>
 Note: This project requires you to install PostgreSQL. See Installing PostgreSQL for instructions.
 
-Fork this repository
-Clone your fork
-Run npm install inside the project directory
-Get started on the Iterations
-npm run db:create will create local databases for development and testing.
+1. Fork this repository
+2. Clone your fork
+3. Run <code>npm install</code> inside the project directory
+4. Get started on the Iterations
+
+<code>npm run db:create</code> will create local databases for development and testing.
 
 Installing PostgreSQL
 Mac
-You can install PostgreSQL on a Mac with brew:
+You can install PostgreSQL on a Mac with <code>brew</code>:
 
-brew install postgresql
+<span class="pl-c1">brew install postgresql</span>
 Once installed, start the database server with
 
-brew services start postgresql
-Windows
+<span class="pl-c1">brew services start postgresql</span>
+<h3>Windows</h3>
 You can install PostgreSQL on Windows using Chocolatey's choco command:
 
-choco install postgresql
+<span class="pl-c1">choco install postgresql</span>
 See the Chocolatey PostgreSQL package page for more details.
 
 Once installed, you have to add PostgreSQL's bin directory to your PATH environment variable. Search for Edit system environment variable to open System Properties. From there, click the Environment Variables button.
