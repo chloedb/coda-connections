@@ -1,7 +1,7 @@
 module.exports = {
   development: {
     client: 'pg',
-    connection: 'postgres://localhost:3000/coda_connections_development',
+    connection: 'postgres://localhost:5432/coda_connections_development',
     debug: true,
     migrations: {
       tableName: 'knex_migrations',
@@ -10,7 +10,7 @@ module.exports = {
 
   test: {
     client: 'pg',
-    connection: 'postgres://localhost:3000/coda_connections_test',
+    connection: 'postgres://localhost:5432/coda_connections_test',
     migrations: {
       tableName: 'knex_migrations',
     }

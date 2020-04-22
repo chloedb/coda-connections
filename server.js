@@ -39,22 +39,6 @@ if (app.inDevelopment()) {
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-// Knex is a module used to generate SQL queries
-// See http://knexjs.org/
-let Knex = require('knex');
-
-// Objection is a module used to represent and manipuldate
-// data from a SQL database using JavaScript. It uses connect
-// to generate the appropriate SQL queries.
-// See https://vincit.github.io/objection.js/
-let { Model } = require('objection');
-
-// Tell Knex how to connect to our database
-// See config/database.js
-let dbConfig = require(app.root('knexfile'));
-let knex = Knex(dbConfig[process.env.NODE_ENV]);
-Model.knex(knex);
-
 // See routes.js — this is where our main app code lives.
 let routes = require('./routes');
 app.use('/', routes);
