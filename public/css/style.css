@@ -1,0 +1,81 @@
+html {
+  font-size: 18px;
+  line-height: 1.5;
+  padding: 15px;
+  display: inline-block;
+  text-align: center;
+  background-color: #8AB8FE;
+  color: rgba(253, 212, 153, 0.952);
+}
+
+#page {
+  margin: auto;
+  width: 600px;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+h1 {
+  font-size: 3rem;
+  margin: 0 0 1.25rem 0;
+  font-weight: 500px;
+}
+
+h2 {
+  font-size: 2rem;
+  margin: 0 0 1.25rem 0;
+  font-family: Helvetica;
+}
+
+p {
+  font-family: "Times New Roman";
+  margin: 0 0 1.5rem 0;
+  padding: 20px;
+}
+
+a {
+  color:#000;
+  text-decoration:none;
+}
+a:hover {
+  text-decoration:underline;
+}
+a:visited {
+  color:#000;
+}
+.nav {
+  padding:5px;
+  border:solid 1px #c0c0c0;
+  border-radius:5px;
+  float:left;
+  align-items: center;
+}
+.nav li {
+  list-style-type:none;
+  float:left;
+  margin:0 10px 0 10px;
+  padding: 15px;
+}
+.nav li a {
+  text-align:center;
+  width:100px;
+  float:left;
+}
+.nav li.active {
+  background-color:green;
+}
+.nav li.active a {
+  color:#fff;
+  font-weight:bold;
+}
+/* .info-p::before {
+  /* content: '\a'; */
+  /* white-space: pre; */
+
+.info-p {
+  width: 100%;
+  text-align: center;
+  float: left;
+}

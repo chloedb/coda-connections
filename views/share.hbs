@@ -1,0 +1,47 @@
+<h3>coda connects</h3>
+<h1>You Are Not Alone</h1>
+
+
+<center><header>
+    <ul class="nav">
+        <li><a href="/">Home</a>
+        </li>
+        <li>|</li>
+        <li><a href="/share">Share</a>
+        </li>
+        <li>|</li>
+        <li><a href="/resources">Resources</a>
+        </li>
+    </ul>
+</header>
+<h2>Share your story</h2>
+
+<p class='info-p'>Here is the words that we will put between the menu and the graphs</p></center>
+
+<form id='story-form' method="POST" action="/share/stories">
+  <label for="share"></label>
+  <textarea name="share" id="shareYourStory" cols="50" rows="10" placeholder="Share your story"></textarea>
+  <button type="submit">Post Story</button>
+</form>
+
+  <div id="messages">
+    <h2>Stories</h2>
+
+  {{#unless stories}}
+      <p>Sorry, no messages. :(</p>
+    {{else}}
+      <ul class="message-list">
+        {{#each stories}}
+          <li>
+            <div class="message-body">
+              {{body}}
+            </div>
+            <div class="message-timestamp">
+              Posted on {{createdAt}}
+            </div>
+          </li>
+        {{/each}}
+      </ul>
+    {{/unless}}
+  </div>
+</div>

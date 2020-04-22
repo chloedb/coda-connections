@@ -1,0 +1,137 @@
+<h3>coda connects</h3>
+<h1>You Are Not Alone</h1>
+
+<center><header>
+    <ul class="nav">
+        <li><a href="/">Home</a>
+        </li>
+        <li>|</li>
+        <li><a href="/share">Share</a>
+        </li>
+        <li>|</li>
+        <li><a href="/resources">Resources</a>
+        </li>
+    </ul>
+</header>
+<h2>Welcome</h2>
+<br><br><br><br>
+<p class='info-p'>Here is the words that we will put between the menu and the graphs</p></center>
+
+
+  {{!-- <canvas id="mySexChart" width="1600" height="900"></canvas>
+  <canvas id="myincomeChart" width="1600" height="900"></canvas> --}}
+
+{{!-- <div class="sex">
+  <div class="income">
+    <div class="education">
+      <canvas id="myChart" width="200" height="200"></canvas>
+
+    </div>
+    <div class="col-xs-6">
+      <canvas id="myincomeChart" width="200" height="200"></canvas>
+    </div>
+  </div>
+  <canvas id="canvas"></canvas>
+</div> --}}
+
+{{!-- <canvas id="mySexChart"></canvas>
+<canvas id="myIncomeChart"></canvas>
+<script>
+var ctx1 = document.getElementById("mySexChart").getContext("2d");
+var myChart1 = new Chart(ctx1).Line(data,options);
+var ctx2 = document.getElementById("myIncomeChart").getContext("2d");
+var myChart2 = new Chart(ctx2).Line(data,options);
+</script> --}}
+
+<script>
+  let sexChart = document.getElementById('mySexChart').getContext('2d');
+  let dataSex = {
+      labels: ['2012', '2013', '2014', '2015', '2016', '2017', '2018'],
+      datasets: [{
+        label: 'Male',
+        data: [561, 539, 469, 652, 590, 525, 758]
+      },
+      {
+        label: 'Female',
+        data: [1359, 1150, 840, 1196, 1055, 1025, 1206]
+      }],
+    };
+
+  let depressionSexChart = new Chart(sexChart, {
+    type: 'line', // bar, horizontal, pi, line, donut, radar, polar area
+    data: dataSex,
+    options: {},
+  });
+
+  let myIncomeChart = document.getElementById('myIncomeChart').getContext('2d');
+  let dataIncome = {
+      labels: ['2012', '2013', '2014', '2015', '2016', '2017', '2018'],
+      datasets: [{
+        label: '< $20,000',
+        data: [642, 600, 379, 494, 396, 395, 471]
+      },
+      {
+        label: '$20,000 - $34,999',
+        data: [295, 283, 177, 258, 215, 188, 262]
+      },
+      {
+        label: '$35,000 - $49,999',
+        data: [187, 149, 129, 155, 137, 155, 192]
+      },
+      {
+        label: '$50,000 - $ 74,999',
+        data: [250, 186, 107, 197, 159, 192, 205]
+      },
+      {
+        label: '$75,000 - $99,999',
+        data: [160, 155, 106, 150, 120, 147, 323]
+      },
+      {
+        label: '$100,000 +',
+        data: [270, 213, 178, 277, 263, 296, 157]
+      }]
+  }
+  let depressionIncomeChart = new Chart(myIncomeChart, {
+    type: 'line', // bar, horizontal, pi, line,
+    data: dataIncome,
+    });
+  </script>
+
+
+
+  <script>
+  let myEthnicityChart = document.getElementById('myIncomeChart').getContext('2d');
+
+  let depressionEthnicityChart = new Chart(myChart, {
+    type: 'line', // bar, horizontal, pi, line,
+    data: {
+    labels: ['2012', '2013', '2014', '2015', '2016', '2017', '2018'],
+    datasets: [{}]
+    }
+  }
+
+  let depressionEducationChart = new Chart(myChart, {
+    type: 'line', // bar, horizontal, pi, line,
+    data: {
+      labels: ['2012', '2013', '2014', '2015', '2016', '2017', '2018'],
+      datasets: [{}]
+    }
+  }
+
+  let depressionAgeChart = new Chart(myChart, {
+    type: 'line', // bar, horizontal, pi, line,
+    data: {
+      labels: ['2012', '2013', '2014', '2015', '2016', '2017', '2018'],
+      datasets: [{}]
+    }
+  }
+
+</script>
+
+<div>
+  <canvas id="mySexChart"></canvas>
+</div>
+
+<div>
+  <canvas id="myincomeChart"></canvas>
+</div>
