@@ -33,7 +33,7 @@ Note: This project requires you to install PostgreSQL. See Installing PostgreSQL
 
 <code>npm run db:create</code> will create local databases for development and testing.
 
-<h2>Installing PostgreSQL<h2>
+<h2>Installing PostgreSQL</h2>
 <h3>Mac</h3>
 You can install PostgreSQL on a Mac with <code>brew</code>:
 
@@ -85,6 +85,7 @@ Heroku is a service that allows us to host our application and make it available
 
 One nice feature of Heroku is that we use git to publish new versions of your application.
 
+Before anything else, do the following:
 <ol>
 <li>
 <p>Create an account on <a href="https://heroku.com" rel="nofollow">Heroku</a></p>
@@ -107,11 +108,11 @@ One nice feature of Heroku is that we use git to publish new versions of your ap
 </ol>
 You're now ready to deploy to Heroku using git:
 
-git push heroku master
-Once git push has finished, run the following command to ensure the database is up to date:
+<div class="highlight highlight-text-shell-session"><pre><span class="pl-c1">git push heroku master</span></pre></div>
+Once <code>git push</code> has finished, run the following command to ensure the database is up to date:
 
-heroku run npx knex migrate:latest
+<div class="highlight highlight-text-shell-session"><pre><span class="pl-c1">heroku run npx knex migrate:latest</span></pre></div>
 Finally, run
 
-heroku domains
+<div class="highlight highlight-text-shell-session"><pre><span class="pl-c1">heroku domains</span></pre></div>
 to see the domain for your application. Open it up in your browser of choice!
