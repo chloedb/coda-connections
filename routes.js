@@ -1,44 +1,31 @@
 let Router = require('express-promise-router');
-let { Message } = require('./models');
-let { ValidationError } = require('objection');
-
 let router = new Router();
 
+// Knex is a module used to generate SQL queries
+// See http://knexjs.org/
+let Knex = require('knex');
+let dbConfig = require('./knexfile');
+let knex = Knex(dbConfig[process.env.NODE_ENV]);
+
 router.get('/', function(req, res) {
-  res.render('index', {
-    body: 'index.hbs',
-    style: 'style.css'
-  })
+  res.render('index');
 });
+
 // GET /
 router.get('/share', async(request, response) => {
-  let messages = await Message.query().select('*').orderBy('created_at', 'DESC');
+  let stories = await knex('stories').select('*').orderBy('created_at', 'DESC');
 
-  response.render('share', { messages });
+  response.render('share', { stories });
 });
 
 // POST /messages
 router.post('/share/stories', async(request, response) => {
-  let messageBody = request.body.body;
-  let messageTime = new Date();
+  let storyBody = request.body.body;
+  await knex('stories').insert({
+    body: storyBody,
+  });
 
-  try {
-    await Message.query().insert({
-      body: messageBody,
-      created_at: messageTime,
-    });
-
-    response.redirect('/share');
-  } catch(error) {
-    if (error instanceof ValidationError) {
-      let messages = await Message.query().select('*').orderBy('created_at', 'DESC');
-      let errors = error.data;
-
-      response.render('index', { messages, errors });
-    } else {
-      throw error;
-    }
-  }
+  response.redirect('/share');
 });
 
 router.get('/resources', function(req, res) {
